@@ -1,6 +1,7 @@
+
+Python==3.10
 pip==23.2.1
 streamlit==1.24.0
-pickle
 numpy==1.23.5
 plotly==5.9.0
 pandas==1.5.3
