@@ -8,4 +8,5 @@ https://two-wheels-credit-score-prediction-ilycatheez.streamlit.app/
 and for the source of data:
 https://www.kaggle.com/datasets/yashkmd/credit-profile-two-wheeler-loan-dataset
 
+I give a Notebook file IPYNB in notebook folder
 and you can contact me for further about my model, thanks!!!
