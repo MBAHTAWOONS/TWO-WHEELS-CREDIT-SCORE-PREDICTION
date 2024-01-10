@@ -9,19 +9,20 @@ import gdown
 from zipfile import ZipFile
 import pickle
 import time
+import os
 
 
 @st.cache_data
-def load_model():
-    file_id = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    output_file = 'model.zip'
-    print('sedang mengunduh model')
-    time.sleep(3)
-    gdown.download(f'https://drive.google.com/uc?id={file_id}',output_file,quiet=False)
-    done = 'done'
-    print(done)
-    time.sleep(3)
-    with ZipFile(output_file, 'r') as file:
+def load_model(modelzip):
+    # output_file = 'model.zip'
+    # print('sedang mengunduh model')
+    # time.sleep(3)
+    
+    # gdown.download(f'https://drive.google.com/uc?id={file_id}',output_file,quiet=False)
+    # done = 'done'
+    # print(done)
+    # time.sleep(3)
+    with ZipFile(modelzip, 'r') as file:
         with file.open('modelRFRegressor.pkl') as model:
             return pickle.load(model)
    
@@ -49,10 +50,15 @@ def main(model):
         page_demo(model)
 
 if __name__ == '__main__':
-    call = st.text('Loading For Model')
-    model = load_model()
+    modelzip = 'model.zip'
+    fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    if not os.path.exists(modelzip):
+        call = st.text('Loading For Model')
+        gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
+        call.text("")
+    model = load_model(modelzip)
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
-    call.text("")
+    
     st.text(
     """
     Welcome to this try Credit Score for two wheeler loan model !
