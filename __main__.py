@@ -12,6 +12,7 @@ import time
 import os
 
 
+
 @st.cache_data
 def load_model(modelzip):
     # output_file = 'model.zip'
@@ -49,13 +50,16 @@ def main(model):
     elif menu_option == 'MACHINE LEARNING DEMO':
         page_demo(model)
 
+modelzip = 'model.zip'
+fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+
+if not os.path.exists(modelzip):
+    call = st.text('Loading For Model')
+    gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
+    call.text("")
+
 if __name__ == '__main__':
-    modelzip = 'model.zip'
-    fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    if not os.path.exists(modelzip):
-        call = st.text('Loading For Model')
-        gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
-        call.text("")
+    
     model = load_model(modelzip)
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
     
