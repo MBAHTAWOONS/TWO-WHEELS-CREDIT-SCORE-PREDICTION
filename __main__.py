@@ -65,10 +65,8 @@ if __name__ == '__main__':
     
     if not os.path.exists(modelzip):
         call = st.text('Loading For Model')
-        gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
+        gdown.download(f'https://drive.google.com/uc?id={fileid}',modelzip,quiet=False)  
         call.text("")
-
-    
 
     model =  load_model(modelzip)
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
