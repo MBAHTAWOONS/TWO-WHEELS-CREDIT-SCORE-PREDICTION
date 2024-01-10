@@ -13,20 +13,21 @@ import os
 
 
 
-@st.cache_data
-def load_model(modelzip):
-    # output_file = 'model.zip'
-    # print('sedang mengunduh model')
-    # time.sleep(3)
+# @st.cache_data
+# def load_model(modelzip):
+#     # output_file = 'model.zip'
+#     # print('sedang mengunduh model')
+#     # time.sleep(3)
     
-    # gdown.download(f'https://drive.google.com/uc?id={file_id}',output_file,quiet=False)
-    # done = 'done'
-    # print(done)
-    # time.sleep(3)
-    with ZipFile(modelzip, 'r') as file:
-        with file.open('modelRFRegressor.pkl') as model:
-            return pickle.load(model)
-   
+#     # gdown.download(f'https://drive.google.com/uc?id={file_id}',output_file,quiet=False)
+#     # done = 'done'
+#     # print(done)
+#     # time.sleep(3)
+#     with ZipFile(modelzip, 'r') as file:
+#         with file.open('modelRFRegressor.pkl') as model:
+#             return pickle.load(model)
+
+
 def main(model):
 
     # Menambahkan opsi menu di sidebar
@@ -50,17 +51,26 @@ def main(model):
     elif menu_option == 'MACHINE LEARNING DEMO':
         page_demo(model)
 
-modelzip = 'model.zip'
-fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-
-if not os.path.exists(modelzip):
-    call = st.text('Loading For Model')
-    gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
-    call.text("")
+@st.cache_data
+def load_model(modelzip):
+    with ZipFile(modelzip, 'r') as file:
+        with file.open('modelRFRegressor.pkl') as model:
+            model = pickle.load(model)
+            return model
 
 if __name__ == '__main__':
     
-    model = load_model(modelzip)
+    modelzip = 'model.zip'
+    fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    
+    if not os.path.exists(modelzip):
+        call = st.text('Loading For Model')
+        gdown.download('https://drive.google.com/uc?id={file_id}',modelzip,quiet=False)
+        call.text("")
+
+    
+
+    model =  load_model(modelzip)
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
     
     st.text(
@@ -71,15 +81,8 @@ if __name__ == '__main__':
     """
     )
     main(model)
-# st.markdown("""
-# <style>
-# body {
-# color: #fff;
-# background-color: #111;
-# }
-# </style>
-# """, unsafe_allow_html=True)
+   
 
-# st.markdown("# Welcome to this page! 👋")
+
 
 
