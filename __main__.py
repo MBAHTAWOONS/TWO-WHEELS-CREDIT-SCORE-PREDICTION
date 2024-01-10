@@ -61,11 +61,11 @@ def load_model(modelzip):
 if __name__ == '__main__':
     
     modelzip = 'model.zip'
-    fileid = '15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
     
     if not os.path.exists(modelzip):
         call = st.text('Loading For Model')
-        gdown.download(f'https://drive.google.com/uc?id={fileid}',modelzip,quiet=False)  
+        gdown.download(url,modelzip,quiet=False)  
         call.text("")
 
     model =  load_model(modelzip)
