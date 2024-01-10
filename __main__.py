@@ -61,7 +61,7 @@ def load_model(modelzip):
 if __name__ == '__main__':
     
     modelzip = 'model.zip'
-    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa&authuser=0'
+    url = 'www.drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa&authuser'
     url1 = 'https://drive.usercontent.google.com/download?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa&authuser=0'
     
     if not os.path.exists(modelzip):
