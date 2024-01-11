@@ -10,6 +10,8 @@ from zipfile import ZipFile
 import pickle
 import time
 import os
+from io import BytesIO
+import requests
 
 
 
@@ -61,12 +63,15 @@ def load_model(modelzip):
 if __name__ == '__main__':
     
     modelzip = 'model.zip'
-    url1 = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    url = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
+    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    #url1 = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
     
     if not os.path.exists(modelzip):
         call = st.text('Loading For Model')
-        gdown.download(url,modelzip,quiet=False)  
+        #gdown.download(url,modelzip,quiet=False)
+        response = requests.get(url)
+        if response.status_code == 200:
+            modelzip = BytesIO(response.content)  
         call.text("")
 
     model =  load_model(modelzip)
