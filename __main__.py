@@ -54,7 +54,7 @@ def main(model):
 @st.cache_data
 def load_model(modelzip):
     with ZipFile(modelzip, 'r') as file:
-        with file.open('modelRFRegressor.pkl') as model:
+        with file.open('modelRFRegressor.pkl','r') as model:
             model = pickle.load(model)
             return model
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     
     modelzip = 'model.zip'
     url1 = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    url = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa/view?usp=sharing'
+    url = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
     
     if not os.path.exists(modelzip):
         call = st.text('Loading For Model')
