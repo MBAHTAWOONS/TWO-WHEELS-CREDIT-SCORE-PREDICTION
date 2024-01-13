@@ -5,13 +5,10 @@ from all_page.DATA_FEATURE import page_df
 from all_page.Home_page import page_home
 from all_page.Visualization_Demo import page_viz
 from all_page.Machine_Learning_Demo import page_demo
-import gdown
 from zipfile import ZipFile
 import pickle
 import time
 import os
-from io import BytesIO
-import requests
 
 
 
@@ -54,27 +51,28 @@ def main(model):
         page_demo(model)
 
 @st.cache_data
-def load_model(modelzip):
-    with ZipFile(modelzip, 'r') as file:
-        with file.open('modelRFRegressor.pkl','r') as model:
-            model = pickle.load(model)
-            return model
+def load_model(modelfolder):
+    modelfile = 'modelRFRegressor.pkl'
+    modelpath = os.path.join(modelfolder,modelfile)
+    
+    with open(modelpath,'rb') as file:
+        model = pickle.load(file)
+        return model
 
 if __name__ == '__main__':
     
-    modelzip = 'model.zip'
-    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    # url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
     #url1 = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
     
-    if not os.path.exists(modelzip):
-        call = st.text('Loading For Model')
-        #gdown.download(url,modelzip,quiet=False)
-        response = requests.get(url)
-        if response.status_code == 200:
-            modelzip = BytesIO(response.content)  
-        call.text("")
+    # if not os.path.exists(modelzip):
+    #     call = st.text('Loading For Model')
+    #     #gdown.download(url,modelzip,quiet=False)
+    #     with zipfile  
+    #     call.text("")
+    with ZipFile('model.zip','r') as modelzip:
+        modelzip.extract('modelRFRegressor.pkl','file')
 
-    model =  load_model(modelzip)
+    model =  load_model('file')
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
     
     st.text(
