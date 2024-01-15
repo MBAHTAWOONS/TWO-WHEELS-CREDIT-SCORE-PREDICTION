@@ -7,9 +7,9 @@ from all_page.Visualization_Demo import page_viz
 from all_page.Machine_Learning_Demo import page_demo
 from zipfile import ZipFile
 import pickle
-import time
 import os
-
+import sklearn
+import gdown
 
 
 # @st.cache_data
@@ -61,16 +61,16 @@ def load_model(modelfolder):
 
 if __name__ == '__main__':
     
-    # url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
     #url1 = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
     
-    # if not os.path.exists(modelzip):
-    #     call = st.text('Loading For Model')
-    #     #gdown.download(url,modelzip,quiet=False)
-    #     with zipfile  
-    #     call.text("")
-    with ZipFile('model.zip','r') as modelzip:
-        modelzip.extract('modelRFRegressor.pkl','file')
+    if not os.path.exists('model.zip'):
+        call = st.text('Loading For Model')
+        gdown.download(url,'model.zip',quiet=False)
+        # with zipfile  
+        call.text("")
+        with ZipFile('model.zip','r') as zip:
+            zip.extract('modelRFRegressor.pkl','file')
 
     model =  load_model('file')
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
