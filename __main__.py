@@ -51,30 +51,22 @@ def main(model):
         page_demo(model)
 
 @st.cache_data
-def load_model(modelfolder):
-    modelfile = 'modelRFRegressor.pkl'
-    modelpath = os.path.join(modelfolder,modelfile)
-    
-    with open(modelpath,'rb') as file:
-        model = pickle.load(file)
+def load_model():
+    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+
+    gdown.download(url,'model.zip',quiet=False)
+    with ZipFile('model.zip','r') as zip:
+        model = zip.read('modelRFRegressor.pkl')
+        model = pickle.loads(model)
         return model
 
 if __name__ == '__main__':
     
-    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    #url1 = 'https://drive.google.com/file/d/15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'#/view?usp=sharing'
-    
-    if not os.path.exists('model.zip'):
-        call = st.text('Loading For Model')
-        gdown.download(url,'model.zip',quiet=False)
-        # with zipfile  
-        call.text("")
-        with ZipFile('model.zip','r') as zip:
-            zip.extract('modelRFRegressor.pkl','file')
-
-    model =  load_model('file')
+    call = st.text('Loading For Model')
+    model= load_model()
+    call.text("")
+        
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
-    
     st.text(
     """
     Welcome to this try Credit Score for two wheeler loan model !
