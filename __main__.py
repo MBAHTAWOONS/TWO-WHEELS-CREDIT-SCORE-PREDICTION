@@ -51,19 +51,20 @@ def main(model):
         page_demo(model)
 
 @st.cache_data(persist=True)
-def load_model():
-    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-
-    gdown.download(url,'model.zip',quiet=False)
-    with ZipFile('model.zip','r') as zip:
+def load_model(model):
+    
+    with ZipFile(model,'r') as zip:
         model = zip.read('modelRFRegressor.pkl')
         model = pickle.loads(model)
         return model
 
 if __name__ == '__main__':
+
+    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
+    gdown.download(url,'model.zip',quiet=False)
     
     call = st.text('Loading For Model')
-    model= load_model()
+    model= load_model('model.zip')
     call.text("")
         
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
