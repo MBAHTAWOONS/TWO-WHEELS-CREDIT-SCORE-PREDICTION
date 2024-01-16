@@ -50,7 +50,7 @@ def main(model):
     elif menu_option == 'MACHINE LEARNING DEMO':
         page_demo(model)
 
-@st.cache_data
+@st.cache_data(persist=True)
 def load_model():
     url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
 
