@@ -7,6 +7,7 @@ from all_page.Visualization_Demo import page_viz
 from all_page.Machine_Learning_Demo import page_demo
 from zipfile import ZipFile
 import pickle
+from joblib import load
 import os
 import sklearn
 import gdown
@@ -53,18 +54,19 @@ def main(model):
 @st.cache_data(persist=True)
 def load_model(model):
     
-    with ZipFile(model,'r') as zip:
-        model = zip.read('modelRFRegressor.pkl')
-        model = pickle.loads(model)
-        return model
+    # with ZipFile(model,'r') as zip:
+        # model = zip.read('modelRFRegressor.joblib')
+        # model = pickle.loads(model)
+    model = load(model)
+    return model
 
 if __name__ == '__main__':
 
-    url = 'https://drive.google.com/uc?id=15qvS2MpqZL5Vxf3oCd-oJL2K3eH9oWZa'
-    gdown.download(url,'model.zip',quiet=False)
-    
+    url = 'https://drive.google.com/uc?id=1UIUmPJ8pl-iF2wjSCb8mrlGa_-7btq-v'
+    gdown.download(url,'modelRFRegressor.joblib',quiet=False)
+    # model = 'model/modelRFRegressor.zip'
     call = st.text('Loading For Model')
-    model= load_model('model.zip')
+    model= load_model('modelRFRegressor.joblib')
     call.text("")
         
     st.subheader("TWO WHEELER LOAN CREDIT SCORE PREDICTION",)
